@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -17,6 +18,8 @@ public class Produit {
 	private Double prixProduit;
 	private Date dateCreated;
 	private int quantite;
+	@ManyToOne
+	private Categorie categorie;
 	
 	
 	public Produit() {

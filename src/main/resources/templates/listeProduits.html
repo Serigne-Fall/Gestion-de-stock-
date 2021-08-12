@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="template">
+<head>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.6.0/css/bootstrap.min.css"/>
+<script type="text/javascript" src="webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Liste des Produits</title>
+</head>
+<body>
+<div layout:fragment="myContent">
+	<div class="container mt-5">
+     		<center><h1 style="text-transform: uppercase;text-shadow: 2px 2px 1px blue;" class="mb-10 mt-3">*** Liste de tous les Produits ***</h1></center>
+     		<div class="card">
+     			<div class="card-header">
+     				Liste des Produits
+     			</div>
+     			<div class="card-body">
+     				<table class="table table-striped">
+	     					<tr>
+				     			<th>Noms des Produits</th>
+				     			<th>Prix des Produits</th>
+				     			<th>Dates de Creation</th>
+				     			<th>qte de Stock</th>
+				     			<th>Modification</th>
+				     			<th>Suppression</th>
+	     					</tr>
+     					
+				     		<tr th:each="p:${produits}">
+				     			<td th:text="${p.nomProduit}"></td>
+				     			<td th:text="${p.prixProduit}"></td>
+				     			<td th:text="${p.dateCreated}"></td>
+				     			<td th:text="${p.quantite}"></td>
+				     			<td><a th:href="@{editProduitForm(id=${p.idProduit})}"><button type="button" class="btn btn-info">Modifier</button></a></td>
+				     			<td><a onclick="return confirm('Etes-vous sure de vouloir supprimer ce produit?')" th:href="@{deleteProduit(id=${p.idProduit},page=${currentPage},size=${size})}"><button type="button" class="btn btn-danger">Supprimerr</button></a></td>
+				     		</tr>
+     		            
+     				</table>
+     				<ul class="nav nav-pills">
+     					<li th:each="page,status:${nbrPages}">
+     						<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" th:href="@{listeProduits(page=${status.index},size=${size})}" th:text="${status.index}"></a>
+     					</li>
+     				</ul>		
+     			</div>
+     		</div>
+     </div>
+</div>
+</body>
+</html>
